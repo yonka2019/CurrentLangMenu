@@ -24,9 +24,9 @@ internal class KeyboardLayoutWatcher : IDisposable
     {
         try
         {
-            IntPtr foregroundWindow = GetForegroundWindow();
-            uint foregroundProcess = GetWindowThreadProcessId(foregroundWindow, IntPtr.Zero);
-            int keyboardLayout = GetKeyboardLayout(foregroundProcess).ToInt32() & 0xFFFF;
+            IntPtr foregroundWindow = GetForegroundWindow(); // get active window
+            uint foregroundProcess = GetWindowThreadProcessId(foregroundWindow, IntPtr.Zero); // get process id of this active window
+            int keyboardLayout = GetKeyboardLayout(foregroundProcess).ToInt32() & 0xFFFF; // get layout of this process which is the active window
 
             if (keyboardLayout == 0)
             {
